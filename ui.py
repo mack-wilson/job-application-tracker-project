@@ -1,5 +1,6 @@
 # ui.py
 import data_handler
+from data_handler import DataHandler
 
 import tkinter as tk
 from tkinter import ttk
@@ -88,7 +89,17 @@ class JobAppTrackerUI:
 
         back_button = ttk.Button(self.db_frame, text="Back to Home", command=self.back_to_home)
         back_button.pack(side=tk.BOTTOM, pady=10)
-
+        
+    def submit_new_app(self):
+        application_data = {
+            'job_title': self.new_app_data['job_title'].get(),
+            'company': self.new_app_data['company'].get(),
+            'source': self.new_app_data['source'].get(),
+            'job_link': self.new_app_data['job_link'].get(),
+            'salary_estimate': self.new_app_data['salary_estimate'].get()
+        }
+        self.data_handler.add_job_application(self.file_name, application_data)
+        self.back_to_home()
 
     def back_to_home(self):
         if hasattr(self, 'new_app_frame'):
@@ -101,5 +112,6 @@ class JobAppTrackerUI:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = JobAppTrackerUI(root)
+    data_handler_instance = DataHandler()
+    app = JobAppTrackerUI(root, data_handler_instance)
     root.mainloop()
