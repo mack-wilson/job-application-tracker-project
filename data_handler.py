@@ -1,5 +1,6 @@
 # data_handler.py
 import csv
+import os
 
 def load_job_applications(file_name):
     job_applications = []
