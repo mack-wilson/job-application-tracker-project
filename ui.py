@@ -1,6 +1,9 @@
 # ui.py
+import data_handler
+
 import tkinter as tk
 from tkinter import ttk
+
 
 
 class JobAppTrackerUI:
@@ -8,6 +11,7 @@ class JobAppTrackerUI:
         self.master = master
         self.data_handler = data_handler
         self.master.title("Job Application Tracker")
+        self.file_name = "job_applications.csv"
         self.create_home_page()
 
     def create_home_page(self):
