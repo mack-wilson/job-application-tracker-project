@@ -4,10 +4,10 @@ from tkinter import ttk
 
 
 class JobAppTrackerUI:
-    def __init__(self, master):
+    def __init__(self, master, data_handler):
         self.master = master
+        self.data_handler = data_handler
         self.master.title("Job Application Tracker")
-
         self.create_home_page()
 
     def create_home_page(self):
