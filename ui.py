@@ -58,6 +58,12 @@ class JobAppTrackerUI:
         entry = ttk.Entry(parent, textvariable=text_var, width=50)
         entry.grid(row=row, column=1, padx=10, pady=5)
 
+    def load_applications(self):
+        job_applications = self.data_handler.load_job_applications(self.file_name)
+        for app_data in job_applications:
+            self.tree.insert('', 'end', values=(app_data['job_title'], app_data['company'], app_data['source'], app_data['job_link'], app_data['salary_estimate'], app_data.get('status', '')))
+        
+        
     def db_page(self):
         self.home_frame.pack_forget()
         self.db_frame = ttk.Frame(self.master)
@@ -68,7 +74,10 @@ class JobAppTrackerUI:
             self.tree.heading(col, text=col)
             self.tree.column(col, anchor=tk.W)
         self.tree.pack(pady=5, padx=5, expand=True, fill=tk.BOTH)
-
+        
+        back_button = ttk.Button(self.db_frame, text="Back to Home", command=self.back_to_home)
+        back_button.pack(side=tk.BOTTOM, pady=10)
+        
         self.load_applications()
 
         update_button = ttk.Button(self.db_frame, text="Update Selected Application", command=self.update_application)
